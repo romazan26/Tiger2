@@ -12,32 +12,19 @@ struct PageIntroView: View {
     
     var body: some View {
 
-        ZStack(alignment: .bottom) {
-           // Color.yellowApp
+        VStack {
             Image(page.imageUrl)
                 .resizable()
+                .aspectRatio(contentMode: .fit)
                 .padding(20)
-                .padding(.top, 40)
-            VStack {
+            
                 Text(page.text)
-                    .font(.system(size: 34, weight: .heavy))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-                    
-                Text(page.text2)
-                    .font(.system(size: 22))
-                    .foregroundColor(.gray)
-                    .multilineTextAlignment(.center)
-                    
-                    .padding(.bottom, 130)
-            }
-            .padding(20)
-            .background {
-                Color.black.cornerRadius(12)
-                    
-            }
-        }.ignoresSafeArea()
+                .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal)
+            
+        }.padding()
                         
  
     }

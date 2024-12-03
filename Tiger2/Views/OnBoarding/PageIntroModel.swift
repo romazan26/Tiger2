@@ -11,13 +11,13 @@ struct PageIntro: Identifiable,Equatable {
     let id = UUID()
     var imageUrl: String
     var text: String
-    var text2: String
     var tag: Int
 
-    static var samplePage = PageIntro(imageUrl: "intro1", text: "Your dream home starts here", text2: "Add your exterior and interior designs, upload photos and write notes.", tag: 0)
+    static var samplePage = PageIntro(imageUrl: "intro1", text: "For what purposes do you want to print photos?", tag: 0)
     
     static var sampalePages: [PageIntro] = [
-        PageIntro(imageUrl: "intro1", text: "Your dream home starts here", text2: "Add your exterior and interior designs, upload photos and write notes.", tag: 0),
-        PageIntro(imageUrl: "intro2", text: "Save and access anytime", text2: "Your projects are always within reach and available offline. Start creating now!", tag: 1),
+        PageIntro(imageUrl: "intro1", text: "For what purposes do you want to print photos?", tag: 2),
+        PageIntro(imageUrl: "intro2", text: "Create photos as birthday gifts!", tag: 3),
+        PageIntro(imageUrl: "intro3", text: "You can create photos with captions for friends!", tag: 4)
     ]
 }

@@ -8,50 +8,54 @@
 import SwiftUI
 
 struct IntroView: View {
-    @AppStorage("isFirstLaunch") private var isFirstLaunch: Bool?
+    @StateObject var vm = IntroViewModel()
     
-    @State private var isPresented = false
-    @State private var pageIndex = 0
     @Environment(\.dismiss) var dismiss
     
-    private let pages: [PageIntro] = PageIntro.sampalePages
+    
     private let dotAppearance = UIPageControl.appearance()
     
     var body: some View {
         
         ZStack(alignment: .bottom) {
-            TabView(selection: $pageIndex,
-                    content:  {
-                ForEach(pages) { page in
-                    PageIntroView(page: page)
-                        .tag(page.tag)
-                        
+            BackGroundLoadingView()
+                 
+            VStack{
+                switch vm.pageIndex {
+                case 0: WelcomView(vm: vm)
+                case 1: EntityUserview(vm: vm)
+                
+                default:
+                    TabView(selection: $vm.pageIndex,
+                            content:  {
+                        ForEach(vm.pages) { page in
+                            PageIntroView(page: page)
+                                .tag(page.tag)
+                            
+                        }
+                    })
+                    
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .indexViewStyle(.page(backgroundDisplayMode: .interactive))
+                
                 }
-            })
-            .ignoresSafeArea()
-            .animation(.easeInOut, value: pageIndex)
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .indexViewStyle(.page(backgroundDisplayMode: .interactive))
-            
-            HStack{
-               
+                    
+                
+                
                 //MARK: - Navigation Button
                 Button(action: {
-                    pageIndex += 1
-                    print(pageIndex)
-                    if pageIndex > pages.count - 1 {
-                        isPresented = true
-                        if isFirstLaunch ?? true{
-                            isFirstLaunch = false
-                        }
-                    }
+                    vm.nextPage()
                 }, label: {
-                   // CustomButtonView()
-                }).padding()
-                
+                    CustomButtonView()
+                    
+                })
+                .padding()
             }
+            .animation(.easeInOut, value: vm.pageIndex)
+            
+            
         }
-        .fullScreenCover(isPresented: $isPresented, content: {
+        .fullScreenCover(isPresented: $vm.isPresented, content: {
             MainView()
         })
     }

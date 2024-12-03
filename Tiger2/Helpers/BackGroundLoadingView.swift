@@ -11,11 +11,13 @@ struct BackGroundLoadingView: View {
     var body: some View {
         ZStack(alignment: .top) {
             Color.white
+                
             Image(.vectorBaackLoading)
                 .resizable()
-                .frame(width: 473, height: 612)
+                .frame(height: 612)
+                .ignoresSafeArea()
         }
-        .ignoresSafeArea()
+        //.ignoresSafeArea()
     }
 }
 
