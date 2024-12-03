@@ -34,7 +34,7 @@ struct LoadingView: View {
                 }
             })
             .onAppear(perform: {
-                // vm.starttimer()
+                 vm.starttimer()
             })
         
     }
