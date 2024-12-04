@@ -14,18 +14,16 @@ struct MainView: View {
             ZStack {
                 Color.white.ignoresSafeArea()
                 VStack {
-                    //MARK: - Search
+                    //MARK: - User name
                     HStack {
-                        TextField("Search", text: .constant(""))
-                            .padding(8)
-                            .frame(height: 54)
-                            .background {
-                                RoundedRectangle(cornerRadius: 6)
-                                    .foregroundStyle(.grayApp)
-                            }
+                        Text(vm.user?.name ?? "no user name")
+                            .foregroundStyle(.black)
+                            .font(.headline)
+                        
+                        Spacer()
                         
                         NavigationLink {
-                            ////
+                            MyOrdersView(vm: vm)
                         } label: {
                             Image(systemName: "person.circle")
                                 .resizable()
@@ -56,21 +54,51 @@ struct MainView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                 }
-                                Image(.caledradrsButton)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                Image(.interiorButton)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                Image(.presentsbutton)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                Image(.certificatesButton)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                Image(.postersButton)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
+                                NavigationLink {
+                                    AddOrderView(vm: vm).onAppear {
+                                        vm.simpleOrderType = .caledars
+                                    }
+                                } label: {
+                                    Image(.caledradrsButton)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                                NavigationLink {
+                                    AddOrderView(vm: vm).onAppear {
+                                        vm.simpleOrderType = .interior
+                                    }
+                                } label: {
+                                    Image(.interiorButton)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                                NavigationLink {
+                                    AddOrderView(vm: vm).onAppear {
+                                        vm.simpleOrderType = .presents
+                                    }
+                                } label: {
+                                    Image(.presentsbutton)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                                NavigationLink {
+                                    AddOrderView(vm: vm).onAppear {
+                                        vm.simpleOrderType = .certificates
+                                    }
+                                } label: {
+                                    Image(.certificatesButton)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                                NavigationLink {
+                                    AddOrderView(vm: vm).onAppear {
+                                        vm.simpleOrderType = .postcards
+                                    }
+                                } label: {
+                                    Image(.postcardsButton)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                }
                             }
                             Image(.hightQuality)
                                 .resizable()

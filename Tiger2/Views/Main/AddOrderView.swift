@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddOrderView: View {
     @StateObject var vm: MainViewModel
+    @FocusState var isFocused: Bool
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         ScrollView {
             VStack {
@@ -44,20 +46,62 @@ struct AddOrderView: View {
                 
                 //MARK: - Discription
                 MultiLineTF(txt: $vm.simpleDescription, placehold: "Discription")
+                    .focused($isFocused)
                     .frame(minHeight: 54)
                     .padding()
                     .background {
                         Color.white.cornerRadius(8)
                     }
                 
+                //MARK: - Choose photo
+                    ScrollView(.horizontal) {
+                        HStack{
+                            ForEach(vm.simpleImages, id: \.self) { image in
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .frame(width: 90, height: 90)
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(6)
+                            }
+                            if vm.chooseImages != UIImage(resource: .photo1) {
+                                Image(uiImage: vm.chooseImages)
+                                    .resizable()
+                                    .frame(width: 90, height: 90)
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(6)
+                            }
+                        }
+                    }
+                
                 
                 //MARK: - Group of buttons
                 HStack{
-                    CustomButtonView(color: .black , label: "Add Photo")
-                    CustomButtonView(label: "Send")
+                    //MARK: add photo button
+                    Button {
+                        vm.addNewPhoto()
+                    } label: {
+                        CustomButtonView(color: .black , label: "Add Photo")
+                    }
+
+                    //MARK: - Send button
+                    Button {
+                        dismiss()
+                        vm.addOrder()
+                    } label: {
+                        CustomButtonView(label: "Send")
+                    }
                 }
                 Spacer()
             }
+            .onDisappear {
+                vm.clearOrder()
+            }
+            .onTapGesture(perform: {
+                isFocused = false
+            })
+            .sheet(isPresented: $vm.isPresentPhotoLibrary, content: {
+                PhotoPicker(configuration: vm.config, pickerResult: $vm.chooseImages, isPresented: $vm.isPresentPhotoLibrary)
+            })
             .padding(8)
             .background {
                 Color.grayApp.cornerRadius(8)

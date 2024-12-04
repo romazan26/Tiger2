@@ -27,9 +27,9 @@ enum TypeOrder: String, Codable {
         case .interior:
             "We specialize in transforming your favorite photographs into stunning wall art that enhances the ambience of any room. Choose from a variety of finishes, including matte, glossy, and canvas, to match your decor style. Our expert team ensures accurate color reproduction and exceptional print quality. "
         case .presents:
-            ""
+            "Presents printing service offers high-quality prints of your digital presents on various types of paper, including glossy, matte, and premium options. We provide fast turnaround times and ensure vibrant colors and sharp details in every print."
         case .certificates:
-            ""
+            "Certificates printing service offers high-quality prints of your digital photos on various types of paper, including glossy, matte, and premium options. We provide fast turnaround times and ensure vibrant colors and sharp details in every print."
         case .postcards:
             "Easily turn your favorite photos into beautiful postcards! Our high-quality printing service ensures vibrant colors and sharp details. Choose from a variety of cardstock options to make your memories last. Perfect for sending greetings or preserving special moments. Order now and create unique, personalized postcards that will bring joy to your loved ones."
         }
@@ -47,9 +47,9 @@ enum TypeOrder: String, Codable {
         case .interior:
             [.inter1,.inter2,.inter3]
         case .presents:
-            []
+            [.photo1,.photo2,.photo3]
         case .certificates:
-            []
+            [.photo1,.photo2,.photo3]
         case .postcards:
             [.poster1,.poster2,.poster3]
         }
